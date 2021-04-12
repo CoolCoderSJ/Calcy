@@ -1,0 +1,90 @@
+$def with (eq, saved, user, answer)
+<!doctype html>
+<html>
+	<head>
+		<link href="https://Minimalist.coolcodersj.repl.co/style.css" rel="stylesheet" type="text/css" />
+		<link href="static/css/style.css" rel="stylesheet" type="text/css" />
+		<script src="static/js/script.js"></script>
+		<link rel="icon" type="image/jpg" sizes="16x16" href="static/images/favicon.jpeg">
+		<title>Calcy</title>
+
+				<div class="topnav text">
+		<a class="brand" href="#">Calcy</a>
+		<div class="topnavitem">
+		 <a class="topnavitem active" href="/">Home</a>
+    <a class="topnavitem" href="/login">Login</a>
+  <a class="topnavitem" href="/signup">Signup</a>
+ 
+  </div>
+</div>
+	</head>
+
+	<body style="margin-top: 110px;">
+		<fieldset>
+			<form method="post" action="/">
+			$if answer != "":
+				<input class="input" value="$eq" style="height: 20px; text-align: right;" readonly>
+				<input class="input" id="eq" name="eq" value="$answer" style="height: 30px;" >
+			$else:
+				<input class="input" id="eq" name="eq" value="" style="height: 40px;">
+			<br><br>
+			
+			<button type="button" onclick="editeq(this.innerHTML)" class="sidebutton">+</button>
+			<button type="button" onclick="editeq(this.innerHTML)" class="sidebutton num cornernum">9</button>
+			<button type="button" onclick="editeq(this.innerHTML)" class="sidebutton num">8</button>
+			<button type="button" onclick="editeq(this.innerHTML)" class="sidebutton num">7</button>
+			<button type="button" onclick="ce()" class="sidebutton cornernum num">CE</button>
+			<button type="button" onclick="ac()" class="sidebutton cornernum num">AC</button>
+			<button type="button" onclick="editeq('sin(')" class="sidebutton cornernum num">sin</button>
+			<br><br><br>
+			<button type="button" onclick="editeq(this.innerHTML)" class="sidebutton">-</button>
+			<button type="button" onclick="editeq(this.innerHTML)" class="sidebutton num cornernum">6</button>
+			<button type="button" onclick="editeq(this.innerHTML)" class="sidebutton num">5</button>
+			<button type="button" onclick="editeq(this.innerHTML)" class="sidebutton num">4</button>
+			<button type="button" onclick="editeq(this.innerHTML)" class="sidebutton cornernum num">)</button>
+			<button type="button" onclick="editeq(this.innerHTML)" class="sidebutton cornernum num">(</button>
+			<button type="button" onclick="editeq('cos(')" class="sidebutton cornernum num">cos</button>
+			<br><br><br>
+			<button type="button" onclick="editeq(this.innerHTML)" class="sidebutton">*</button>
+			<button type="button" onclick="editeq(this.innerHTML)" class="sidebutton num cornernum">3</button>
+			<button type="button" onclick="editeq(this.innerHTML)" class="sidebutton num">2</button>
+			<button type="button" onclick="editeq(this.innerHTML)" class="sidebutton num">1</button>
+			<button type="button" onclick="editeq('^')" class="sidebutton cornernum num">x<sup>y</sup></button>
+			<button type="button" onclick="editeq('√(')" class="sidebutton cornernum num">√</button>
+			<button type="button" onclick="editeq('tan(')" class="sidebutton cornernum num">tan</button>
+			<br><br><br>
+			<button type="button" onclick="editeq(this.innerHTML)" class="sidebutton">÷</button>
+			<button type="button" onclick="editeq(this.innerHTML)" class="sidebutton num cornernum">.</button>
+			<button type="button" onclick="editeq(this.innerHTML)" class="sidebutton num" style="width: 16.3%">0</button>
+			<button type="button" onclick="editeq('factorial(')" class="sidebutton cornernum num">x!</button>
+			<button type="button" onclick="editeq(this.innerHTML)" class="sidebutton cornernum num">π</button>
+			
+			<br><br><br>
+			<button type="submit" class="sidebutton largebutton">=</button>
+			</form>
+		</fieldset>
+<br><br><br><br>
+		$if user == None and answer != "":
+			<a href="/signup"><button>Login/Signup to save this answer</button></a>
+		$elif answer != "" and user != None:
+			<form method="post" action="save">
+				<input type="hidden" value="$eq" name="eq">
+				<input type="hidden" value="$answer" name="answer">
+				<button type="submit">Save Result</button>
+			</form>
+		
+		$if saved != []:
+			<fieldset>
+				<legend class="text">Saved Results</legend>
+				<div id="parent">
+				$for result in saved:
+					<p>$result[1]['eq'] = $result[1]['ans']</p> <button style="width: 8%; margin-left: 15px;" onclick="ac(); editeq('$result[1]['eq']')">Load</button>
+					<form method="post" action="delete">
+						<input type="hidden" value="$result[0]" name="key">
+						<button style="margin-left: 15px;" type="submit">Delete</button>
+					</form>
+				</div>
+				<br><br>
+			</fieldset>
+	</body>
+</html>

@@ -1,0 +1,32 @@
+.sidebutton {
+	width: 8%;
+	display: block;
+	float: right;
+}
+
+.largebutton {
+	padding-top: 35px;
+	padding-bottom: 50px;
+}
+
+.num {
+	margin-right: 5px;
+}
+
+.cornernum {
+	margin-right: 10px;
+}
+
+#eq {
+	text-align: right;
+}
+
+#parent {
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+#parent > p, #parent > button, #parent > form, #parent > input {
+    display: inline-block;
+}
